@@ -1,0 +1,21 @@
+{
+  "files.exclude": {
+    // ".env": true,
+    // "node_modules": true,
+    // ".gitignore": true,
+    // "desktop.ini": true,
+    // "package-lock.json": true,
+    // "package.json": true,
+    // ".babelrc": true,
+    // "dist": true,
+    // ".editorconfig": true,
+    // ".eslintrc": true,
+    // ".travis.yml": true,
+    // "README.md": true,
+    // "rollup.config.js": true,
+    // "example": true
+  },
+  "files.associations": {
+    "*.js": "javascriptreact"
+  }
+}

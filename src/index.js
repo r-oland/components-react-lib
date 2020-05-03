@@ -1,6 +1,8 @@
-import React from 'react'
-import styles from './styles.module.css'
+import React from "react";
+import styled from "styled-components";
+
+const Test = styled.h1``;
 
 export const ExampleComponent = ({ text }) => {
-  return <div className={styles.test}>Example Component: {text}</div>
-}
+  return <Test>Hello is {text} your looking for?</Test>;
+};

@@ -3,16 +3,14 @@ import React from "react";
 import styled from "styled-components";
 import { color } from "styled-system";
 
-const Test = styled.div`
-  width: 20px;
-  height: 15px;
+const Test = styled(motion.div)`
   ${color}
 `;
 
-export const ExampleComponent = ({ bg }) => {
+export const ExampleComponent = ({ bg, color }) => {
   return (
-    <motion.div animate={{ x: 100 }}>
-      <Test bg={bg} />
-    </motion.div>
+    <Test animate={{ y: 80 }} bg={bg} color={color}>
+      test
+    </Test>
   );
 };

@@ -6,7 +6,7 @@
     "desktop.ini": true,
     "package-lock.json": true,
     // "package.json": true,
-    "dist": true,
+    // "dist": true,
     ".editorconfig": true,
     ".eslintrc": true,
     ".travis.yml": true,

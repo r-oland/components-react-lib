@@ -5,7 +5,7 @@
 ## Install
 
 ```bash
-npm install --save components-react-libt
+npm install --save components-react-lib
 ```
 
 ## License

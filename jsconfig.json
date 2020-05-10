@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6"
+  },
+  "include": ["src/**/*", "node_modules/hooks-lib"],
+  "exclude": ["node_modules/hooks-lib/dist", "node_modules/hooks-lib/src"]
+}

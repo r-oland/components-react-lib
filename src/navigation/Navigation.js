@@ -1,21 +1,22 @@
 // Components==============
-import { motion } from "framer-motion";
 import { Link } from "gatsby";
 import { useMediaQ } from "hooks-lib";
 import { Container } from "mixins";
 import React from "react";
 import styled from "styled-components";
+import Item from "./Item";
 // =========================
 
 const Wrapper = styled.div`
+  position: relative;
   width: 100%;
   background: ${({ background, mediaQ }) => mediaQ && background};
   box-shadow: ${({ theme: { shadow }, mediaQ }) => mediaQ && shadow.s};
+  z-index: 150;
   ${({ sticky }) =>
     sticky &&
     `
     position: fixed;
-    z-index: 150;
   `}
 `;
 
@@ -32,11 +33,6 @@ const Items = styled.ul`
   align-items: center;
 `;
 
-const Item = styled(motion.li)`
-  margin-left: ${({ theme: { spacing } }) => spacing[6]};
-  cursor: pointer;
-`;
-
 export function Navigation({
   logo,
   items,
@@ -44,13 +40,18 @@ export function Navigation({
   hamburger,
   background = "#fff",
   sticky,
+  hoverEffect = "bar",
 }) {
   const mediaQ = useMediaQ("min", breakPoint);
 
   items = items.map((e, index) => {
     return (
-      <Item key={index} whileHover={{ scale: 1.02 }}>
-        <Link to={`/${e.link}`}>{e.content}</Link>
+      <Item key={index} hoverEffect={hoverEffect}>
+        {e.link === "noLink" ? (
+          <div>{e.content}</div>
+        ) : (
+          <Link to={`/${e.link}`}>{e.content}</Link>
+        )}
       </Item>
     );
   });

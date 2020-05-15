@@ -3,16 +3,17 @@ import { motion } from "framer-motion";
 import { useMediaQ, useOnClickOutside, useToggle } from "hooks-lib";
 import React, { useRef } from "react";
 import styled from "styled-components";
+import { DropdownMenu } from "./DropdownMenu";
 // =========================
 
 const Wrapper = styled.div`
-  position: relative;
+  position: ${({ menuIsFullWidth }) => !menuIsFullWidth && "relative"};
   display: inline-block;
 `;
 
 const ButtonWrapper = styled.div`
   .hoverPointer {
-    cursor: ${({ hover }) => hover && "initial"};
+    cursor: ${({ hover }) => hover && "default"};
   }
 `;
 
@@ -30,16 +31,10 @@ const InvisibleLinker = styled.div`
   height: 100%;
   position: absolute;
   left: 50%;
-  bottom: ${({ isToggled }) => (isToggled ? "-100%" : "0")};
+  bottom: ${({ isToggled }) => (isToggled ? "-65%" : "0")};
   transform: translateX(-50%);
   pointer-events: ${({ isToggled }) => (isToggled ? "initial" : "none")};
-`;
-
-const MenuWrapper = styled.div`
-  position: absolute;
-  top: ${({ position }) => position};
-  left: 50%;
-  transform: translateX(-50%);
+  cursor: initial;
 `;
 
 export function DropdownButton({
@@ -48,6 +43,8 @@ export function DropdownButton({
   arrow,
   menuPosition = "110%",
   hover,
+  menuIsFullWidth,
+  menuWidth = "200px",
 }) {
   const [isToggled, setIsToggled, toggle] = useToggle(false);
   const noMobile = useMediaQ("min", 900);
@@ -67,6 +64,7 @@ export function DropdownButton({
       ref={ref}
       onMouseEnter={hoverCondition ? toggle : undefined}
       onMouseLeave={hoverCondition ? toggle : undefined}
+      menuIsFullWidth={menuIsFullWidth}
     >
       <ButtonWrapper
         onClick={!hoverCondition ? toggle : undefined}
@@ -93,7 +91,14 @@ export function DropdownButton({
           </Arrow>
         )}
       </ButtonWrapper>
-      {isToggled && <MenuWrapper position={menuPosition}>{menu}</MenuWrapper>}
+      {isToggled && (
+        <DropdownMenu
+          menuPosition={menuPosition}
+          menu={menu}
+          menuIsFullWidth={menuIsFullWidth}
+          menuWidth={menuWidth}
+        />
+      )}
     </Wrapper>
   );
 }

@@ -28,12 +28,12 @@ const Arrow = styled.svg`
 
 const InvisibleLinker = styled.div`
   width: 100%;
-  height: 100%;
+  height: 30px;
   position: absolute;
   left: 50%;
-  bottom: ${({ isToggled }) => (isToggled ? "-65%" : "0")};
+  bottom: -15%;
+  pointer-events: ${({ isToggled }) => !isToggled && "none"};
   transform: translateX(-50%);
-  pointer-events: none;
   cursor: initial;
 `;
 

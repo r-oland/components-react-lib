@@ -5,7 +5,7 @@
     ".gitignore": true,
     "desktop.ini": true,
     "package-lock.json": true,
-    // "package.json": true,
+    "package.json": true,
     "dist": true,
     ".editorconfig": true,
     ".eslintrc": true,

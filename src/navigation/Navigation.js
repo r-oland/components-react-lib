@@ -10,12 +10,12 @@ import Item from "./Item";
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  background: ${({ background, mediaQ }) => mediaQ && background};
-  box-shadow: ${({ theme: { shadow }, mediaQ }) => mediaQ && shadow.s};
-  z-index: 150;
+  background: ${({ background }) => background};
+  box-shadow: ${({ theme: { shadow } }) => shadow.s};
   ${({ sticky }) =>
     sticky &&
     `
+    z-index: 150;
     position: fixed;
   `}
 `;
@@ -41,12 +41,13 @@ export function Navigation({
   background = "#fff",
   sticky,
   hoverEffect = "bar",
+  itemSpacing = 8,
 }) {
   const mediaQ = useMediaQ("min", breakPoint);
 
   items = items.map((e, index) => {
     return (
-      <Item key={index} hoverEffect={hoverEffect}>
+      <Item key={index} hoverEffect={hoverEffect} itemSpacing={itemSpacing}>
         {e.link === "noLink" ? (
           <div>{e.content}</div>
         ) : (
@@ -57,9 +58,9 @@ export function Navigation({
   });
 
   return (
-    <Wrapper background={background} sticky={sticky} mediaQ={mediaQ}>
+    <Wrapper background={background} sticky={sticky}>
       <Flex>
-        {logo}
+        <div style={{ zIndex: 300 }}>{logo}</div>
         {mediaQ && <Items>{items}</Items>}
         {!mediaQ && hamburger}
       </Flex>

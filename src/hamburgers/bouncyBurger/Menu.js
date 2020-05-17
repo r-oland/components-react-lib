@@ -51,9 +51,17 @@ export default function Menu({ items, toggle }) {
   items = items.map((e, index) => {
     return (
       <Item key={index}>
-        <Link to={`/${e.link}`}>
-          {e.hamburgerContent ? e.hamburgerContent : e.content}
-        </Link>
+        {e.link === "noLink" ? (
+          e.hamburgerContent ? (
+            e.hamburgerContent
+          ) : (
+            e.content
+          )
+        ) : (
+          <Link to={`/${e.link}`}>
+            {e.hamburgerContent ? e.hamburgerContent : e.content}
+          </Link>
+        )}
       </Item>
     );
   });

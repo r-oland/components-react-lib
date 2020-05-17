@@ -1,12 +1,12 @@
 // Components==============
-import { useToggle } from "hooks-lib";
-import React from "react";
+import React, { useContext } from "react";
 import Burger from "./Burger";
 import Menu from "./Menu";
+import { SubMenuContext } from "./subMenuContext";
 // =========================
 
 export function SideBurger({ items, sticky }) {
-  const [isToggled, , toggle] = useToggle(false);
+  const { toggle, isToggled } = useContext(SubMenuContext);
 
   return (
     <div>

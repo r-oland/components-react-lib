@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useMediaQ, useOnClickOutside, useToggle } from "hooks-lib";
 import React, { useRef } from "react";
 import styled from "styled-components";
+import { DropdownContext } from "./DropdownContext";
 import { DropdownMenu } from "./DropdownMenu";
 // =========================
 
@@ -45,9 +46,10 @@ export function DropdownButton({
   hover,
   menuIsFullWidth,
   menuWidth = "200px",
+  breakPoint = 825,
 }) {
   const [isToggled, setIsToggled, toggle] = useToggle(false);
-  const noMobile = useMediaQ("min", 900);
+  const noMobile = useMediaQ("min", breakPoint);
   const ref = useRef();
   useOnClickOutside(
     ref,
@@ -60,45 +62,47 @@ export function DropdownButton({
   const hoverCondition = hover && noMobile;
 
   return (
-    <Wrapper
-      ref={ref}
-      onMouseEnter={hoverCondition ? toggle : undefined}
-      onMouseLeave={hoverCondition ? toggle : undefined}
-      menuIsFullWidth={menuIsFullWidth}
-    >
-      <ButtonWrapper
-        onClick={!hoverCondition ? toggle : undefined}
-        hover={hoverCondition}
+    <DropdownContext.Provider value={{ toggle, setIsToggled, isToggled }}>
+      <Wrapper
+        ref={ref}
+        onMouseEnter={hoverCondition ? toggle : undefined}
+        onMouseLeave={hoverCondition ? toggle : undefined}
+        menuIsFullWidth={menuIsFullWidth}
       >
-        <InvisibleLinker isToggled={isToggled} />
-        {button}
-        {arrow && (
-          <Arrow viewBox="0 0 7.914 4.705" position={arrow.position}>
-            <motion.g animate={isToggled ? { rotate: 180 } : { rotate: 0 }}>
-              <g transform="translate(-231.691 -1663)">
-                <path
-                  d="M.573,0a.639.639,0,0,1,.573.689V4.82a.639.639,0,0,1-.573.689A.639.639,0,0,1,0,4.82V.689A.639.639,0,0,1,.573,0Z"
-                  transform="translate(231.691 1663.81) rotate(-45)"
-                  fill={arrow.color}
-                />
-                <path
-                  d="M.573,5.508a.639.639,0,0,0,.573-.689V.689A.639.639,0,0,0,.573,0,.639.639,0,0,0,0,.689V4.82A.639.639,0,0,0,.573,5.508Z"
-                  transform="translate(235.71 1667.705) rotate(-135)"
-                  fill={arrow.color}
-                />
-              </g>
-            </motion.g>
-          </Arrow>
+        <ButtonWrapper
+          onClick={!hoverCondition ? toggle : undefined}
+          hover={hoverCondition}
+        >
+          <InvisibleLinker isToggled={isToggled} />
+          {button}
+          {arrow && (
+            <Arrow viewBox="0 0 7.914 4.705" position={arrow.position}>
+              <motion.g animate={isToggled ? { rotate: 180 } : { rotate: 0 }}>
+                <g transform="translate(-231.691 -1663)">
+                  <path
+                    d="M.573,0a.639.639,0,0,1,.573.689V4.82a.639.639,0,0,1-.573.689A.639.639,0,0,1,0,4.82V.689A.639.639,0,0,1,.573,0Z"
+                    transform="translate(231.691 1663.81) rotate(-45)"
+                    fill={arrow.color}
+                  />
+                  <path
+                    d="M.573,5.508a.639.639,0,0,0,.573-.689V.689A.639.639,0,0,0,.573,0,.639.639,0,0,0,0,.689V4.82A.639.639,0,0,0,.573,5.508Z"
+                    transform="translate(235.71 1667.705) rotate(-135)"
+                    fill={arrow.color}
+                  />
+                </g>
+              </motion.g>
+            </Arrow>
+          )}
+        </ButtonWrapper>
+        {isToggled && (
+          <DropdownMenu
+            menuPosition={menuPosition}
+            menu={menu}
+            menuIsFullWidth={menuIsFullWidth}
+            menuWidth={menuWidth}
+          />
         )}
-      </ButtonWrapper>
-      {isToggled && (
-        <DropdownMenu
-          menuPosition={menuPosition}
-          menu={menu}
-          menuIsFullWidth={menuIsFullWidth}
-          menuWidth={menuWidth}
-        />
-      )}
-    </Wrapper>
+      </Wrapper>
+    </DropdownContext.Provider>
   );
 }

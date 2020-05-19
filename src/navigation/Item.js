@@ -18,7 +18,7 @@ const Bar = styled(motion.div)`
   left: -10%;
   width: 120%;
   height: 3px;
-  background: ${({ theme: { primary } }) => primary[4]};
+  background: ${({ theme: { primary } }) => primary[3]};
   z-index: 150;
   pointer-events: none;
 `;

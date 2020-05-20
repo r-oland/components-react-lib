@@ -24,7 +24,7 @@ const Bar = styled(motion.div)`
 `;
 
 export default function Item({ children, hoverEffect, itemSpacing }) {
-  const [hover, watch] = useHover();
+  const [hover, watch, setHover] = useHover();
   const [ref, isDropdown] = useIsDropdown();
 
   return (
@@ -33,6 +33,9 @@ export default function Item({ children, hoverEffect, itemSpacing }) {
       ref={ref}
       isDropdown={isDropdown}
       itemSpacing={itemSpacing}
+      onClick={() => {
+        setHover(false);
+      }}
     >
       {hoverEffect === "bar" && (
         <Bar

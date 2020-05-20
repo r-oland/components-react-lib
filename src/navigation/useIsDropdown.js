@@ -11,5 +11,5 @@ export default function useIsDropdown() {
     dropdownMenu && setIsDropdown(true);
   }, []);
 
-  return [ref, isDropdown];
+  return [ref, isDropdown, setIsDropdown];
 }

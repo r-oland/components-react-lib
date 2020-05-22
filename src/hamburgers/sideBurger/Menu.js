@@ -1,9 +1,10 @@
 // Components==============
 import { Link } from "gatsby";
 import { useScrollFreeze } from "hooks-lib";
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import BarComp from "./Bar";
+import { SubMenuContext } from "./subMenuContext";
 // =========================
 
 const ItemWrapper = styled.div`
@@ -58,13 +59,22 @@ const Shade = styled.div`
 export default function Menu({ items, toggle }) {
   useScrollFreeze();
 
+  const { setSelected } = useContext(SubMenuContext);
+
   const ItemComp = ({ e, isDropdown }) => {
     return (
       <Item>
         {isDropdown ? (
           e.hamburgerContent
         ) : (
-          <Link to={`/${e.link}`} onClick={toggle}>
+          <Link
+            to={`/${e.link}`}
+            onClick={() => {
+              toggle();
+
+              setSelected(null);
+            }}
+          >
             {e.content}
           </Link>
         )}

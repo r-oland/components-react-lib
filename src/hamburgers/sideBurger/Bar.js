@@ -19,14 +19,14 @@ const Bar = styled(motion.div)`
 `;
 
 export default function BarComp({ e, isDropdown }) {
-  const { selected } = useContext(SubMenuContext);
+  const { selected, numberOfItems } = useContext(SubMenuContext);
 
   const animateCondition =
     isDropdown && e.hamburgerContent.props.children === selected;
 
   const wrapper = {
     show: {
-      width: 225,
+      width: 75 * numberOfItems,
       transition: { when: "afterChildren" },
     },
 

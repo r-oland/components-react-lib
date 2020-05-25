@@ -1,4 +1,5 @@
 // Components==============
+import { motion } from "framer-motion";
 import { Link } from "gatsby";
 import { useScrollFreeze } from "hooks-lib";
 import React, { useContext } from "react";
@@ -7,7 +8,7 @@ import BarComp from "./Bar";
 import { SubMenuContext } from "./subMenuContext";
 // =========================
 
-const ItemWrapper = styled.div`
+const ItemWrapper = styled(motion.div)`
   position: fixed;
   top: 0;
   left: 0;
@@ -91,10 +92,23 @@ export default function Menu({ items, toggle }) {
 
   return (
     <div>
-      <ItemWrapper>
+      <ItemWrapper animate="mounted" initial="unMounted" variants={framerMenu}>
         <Items>{items}</Items>;
       </ItemWrapper>
       <Shade onClick={toggle} />
     </div>
   );
 }
+
+const framerMenu = {
+  mounted: {
+    x: 0,
+    transition: {
+      damping: 100,
+      duration: 0.4,
+    },
+  },
+  unMounted: {
+    x: "-100% ",
+  },
+};

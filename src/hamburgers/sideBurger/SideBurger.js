@@ -9,15 +9,12 @@ import { SubMenuContext } from "./subMenuContext";
 export function SideBurger({ items, sticky }) {
   const [selected, setSelected] = useState(null);
   const [isToggled, , toggle] = useToggle(false);
-  const [numberOfItems, setNumberOfItems] = useState(0);
 
   const subMenuValue = {
     selected,
     setSelected,
     toggle,
     isToggled,
-    numberOfItems,
-    setNumberOfItems,
   };
 
   return (

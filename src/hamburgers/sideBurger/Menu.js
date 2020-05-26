@@ -68,18 +68,20 @@ export default function Menu({ items, toggle }) {
         {isDropdown ? (
           e.hamburgerContent
         ) : (
-          <Link
-            to={`/${e.link}`}
-            onClick={() => {
-              toggle();
+          <div>
+            <Link
+              to={`/${e.link}`}
+              onClick={() => {
+                toggle();
 
-              setSelected(null);
-            }}
-          >
-            {e.content}
-          </Link>
+                setSelected(null);
+              }}
+            >
+              {e.content}
+            </Link>
+            <BarComp />
+          </div>
         )}
-        <BarComp e={e} isDropdown={isDropdown} />
       </Item>
     );
   };
